@@ -42,13 +42,9 @@
                 </div>
             </div>
         </div>
-
-
         <div class="m-auto  flex justify-center">
             <div class="w-full lg:px-24 overflow-x-auto">
                 <div>
-
-
                     <div class="overflow-x-auto">
                         <table
                             class="[:where(&)]:min-w-full table-fixed text-zinc-800 divide-y divide-zinc-800/10 dark:divide-white/20 text-zinc-800 whitespace-nowrap [&_dialog]:whitespace-normal [&_[popover]]:whitespace-normal"
@@ -75,7 +71,6 @@
                                         data-flux-column="">
                                         <div class="flex in-[.group\/right-align]:justify-end">Room ID</div>
                                     </th>
-
                                 </tr>
                             </thead>
 
@@ -130,7 +125,6 @@
                             {{ $this->bookings2->links() }}
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
