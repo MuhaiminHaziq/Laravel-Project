@@ -6,6 +6,8 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
 use App\Livewire\Counter;
+use App\Livewire\NewBooking;
+
 
 
 Route::get('/', function () {
@@ -41,7 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
-    Route::get('/counter', Counter::class)->name('counter');
+
+Route::get('counter', Counter::class)->name('counter');
+Route::get('new-booking', NewBooking::class)->name('new-booking');
+
 });
 
 require __DIR__ . '/auth.php';

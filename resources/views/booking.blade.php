@@ -11,7 +11,7 @@
             <form action="/booking-store" method="POST">
                 @csrf
                 <flux:input :label="__('Customer Name')" type="text" name="customer_name" id="customer_name" required
-                    autofocus autocomplete="customer_name" class="w-64" />
+                    autofocus autocomplete="customer_name" />
                 <!-- <input type="text" name="customer_name" id="customer_name"> -->
                 @error('customer_name')
                     <div style="color:red">{{ $message }}</div>

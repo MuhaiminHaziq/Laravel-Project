@@ -22,4 +22,6 @@ class Counter extends Component
     {
         return view('livewire.counter');
     }
+
 }
+
