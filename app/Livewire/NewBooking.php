@@ -67,7 +67,8 @@ class NewBooking extends Component
         ]);
         $this->resetInput();
         $this->updateMode = false;
-        $this->msg='Booking Updated Successfully.';
+        // $this->msg='Booking Updated Successfully.';
+        $this->updateAlert();
     }
 
     public function edit($id){
@@ -84,7 +85,8 @@ class NewBooking extends Component
 
     public function delete($id){
         Booking::find($id)->delete();
-        $this->msg='Booking Deleted Successfully.';
+        // $this->msg='Booking Deleted Successfully.';
+        $this->deleteAlert();
     }
 
     public function store(){
@@ -102,7 +104,46 @@ class NewBooking extends Component
             'booking_code' => $this->booking_code,
             'room_id' => $this->room_id,
         ]);
-        $this->msg='Booking Created Successfully.';
+        // $this->msg='Booking Created Successfully.';
+        $this->successAlert();
         $this->resetInput();
+    }
+
+    public function successAlert(){
+        $this->dispatch('alert', [
+            'type' => 'success',
+            'message' => 'Booking Created Successfully.',
+        ]);
+    }
+
+    public function updateAlert(){
+        $this->dispatch('alert', [
+            'type' => 'success',
+            'message' => 'Booking Updated Successfully.',
+        ]);
+    }
+
+    public function deleteAlert(){
+        $this->dispatch('alert', [
+            'type' => 'success',
+            'message' => 'Booking Deleted Successfully.',
+        ]);
+    }
+
+    public function deleteConfirm($id){
+        $this->dispatch('delete', [
+            'type' => 'warning',
+            'message' => 'Are you sure?',
+            'text' => 'You won\'t be able to revert this!',
+            'id' => $id,
+        ]);
+    }
+
+    public function cancelConfirm(){
+        $this->dispatch('cancel', [
+            'type' => 'warning',
+            'message' => 'Are you sure?',
+            'text' => 'You won\'t be able to revert this!',
+        ]);
     }
 }

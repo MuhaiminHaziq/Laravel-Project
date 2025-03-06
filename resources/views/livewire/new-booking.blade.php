@@ -1,8 +1,8 @@
 <div>
     {{-- Success is as dangerous as failure. --}}
     <div class="flex-1 self-stretch max-md:pt-6">
-        <flux:heading size="xl" level="1">Data Booking</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Manage your data.') }}</flux:subheading>
+        <flux:heading size="xl" level="1">Booking Data</flux:heading>
+        <flux:subheading size="lg" class="mb-6">{{ __('Organize and manage your records.') }}</flux:subheading>
         <flux:separator variant="subtle" />
     </div>
 
@@ -21,12 +21,12 @@
                 id="customer_email" required autofocus autocomplete="customer_email" />
 
             <br>
-            <flux:input wire:model="booking_code" :label="__('Booking Code')" type="text" name="booking_code"
-                id="booking_code" required autofocus autocomplete="booking_code" />
+            <flux:input wire:model="booking_code" :label="__('Booking Code')" type="number" name="booking_code"
+                id="booking_code" required autofocus autocomplete="booking_code" min="0" />
 
             <br>
-            <flux:input wire:model="room_id" :label="__('Room ID')" type="text" name="room_id" id="room_id" required
-                autofocus autocomplete="room_id" />
+            <flux:input wire:model="room_id" :label="__('Room ID')" type="number" name="room_id" id="room_id" required
+                autofocus autocomplete="room_id" min="0" />
 
             <br>
             <div class="flex items-center justify-center gap-4 w-full">
@@ -43,13 +43,9 @@
                 </div>
             </div>
         </div>
-
-
         <div class="m-auto  flex justify-center">
             <div class="w-full lg:px-24 overflow-x-auto">
                 <div>
-
-
                     <div class="overflow-x-auto">
                         <table
                             class="[:where(&)]:min-w-full table-fixed text-zinc-800 divide-y divide-zinc-800/10 dark:divide-white/20 text-zinc-800 whitespace-nowrap [&_dialog]:whitespace-normal [&_[popover]]:whitespace-normal"
@@ -76,7 +72,6 @@
                                         data-flux-column="">
                                         <div class="flex in-[.group\/right-align]:justify-end">Room ID</div>
                                     </th>
-
                                 </tr>
                             </thead>
 
@@ -113,12 +108,11 @@
                                                             variant="primary" type="submit" class="w-full">
                                                             {{ __('Edit') }}
                                                         </flux:button>
-                                                        <flux:button wire:click.prevent="delete({{ $booking->id }})"
+                                                        <flux:button wire:click.prevent="deleteConfirm({{ $booking->id }})"
                                                             variant="danger" type="submit" class="w-full">
                                                             {{ __('Delete') }}
                                                         </flux:button>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </td>
@@ -131,9 +125,39 @@
                             {{ $this->bookings2->links() }}
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        window.addEventListener('alert', function () {
+            Swal.fire({
+                icon: event.detail[0].type,
+                title: event.detail[0].message,
+            });
+        });
+
+        window.addEventListener('delete', function () {
+            const id = event.detail[0].id
+            console.log('delete', event, id)
+            Swal.fire({
+                title: event.detail[0].message,
+                text: event.detail[0].text,
+                icon: event.detail[0].type,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    console.log('delete', event, id);
+                    @this.call('delete', id)
+                }
+                else {
+                    console.log('cancel');
+                    @this.call('resetInput')
+                }
+            })
+        });
+    </script>
 </div>
