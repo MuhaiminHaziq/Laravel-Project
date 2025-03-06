@@ -40,7 +40,7 @@ class NewBooking extends Component
             'bookings' => $bookings
         ]);
     }
-    
+
     public function resetInput(){
         $this->customer_name = '';
         $this->customer_email = '';
@@ -86,7 +86,7 @@ class NewBooking extends Component
         Booking::find($id)->delete();
         $this->msg='Booking Deleted Successfully.';
     }
-    
+
     public function store(){
 
         // dd($this->customer_name, $this->customer_email, $this->booking_code, $this->room_id);
