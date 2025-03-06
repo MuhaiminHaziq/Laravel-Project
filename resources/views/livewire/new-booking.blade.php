@@ -1,4 +1,5 @@
 <div>
+    {{-- Success is as dangerous as failure. --}}
     <div class="flex-1 self-stretch max-md:pt-6">
         <flux:heading size="xl" level="1">Data Booking</flux:heading>
         <flux:subheading size="lg" class="mb-6">{{ __('Manage your data.') }}</flux:subheading>
