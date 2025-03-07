@@ -1,11 +1,11 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    {{-- Be like water. --}}
     <div class="flex-1 self-stretch max-md:pt-6">
-        <flux:heading size="xl" level="1">Booking Data</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Organize and manage your records.') }}</flux:subheading>
+        <flux:heading size="xl" level="1">Room Data</flux:heading>
+        <flux:subheading size="lg" class="mb-6">{{ __('View, manage, and update room information effortlessly.') }}
+        </flux:subheading>
         <flux:separator variant="subtle" />
     </div>
-
     <div class="px-6 py-16 overflow-x-auto">
         @if($msg != '')
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -13,17 +13,17 @@
             </div>
         @endif
         <div class="flex flex-col">
-            <flux:input wire:model="customer_name" :label="__('Customer Name')" type="text" name="customer_name"
-                id="customer_name" required autofocus autocomplete="customer_name" />
+            <flux:input wire:model="room_name" :label="__('Room Name')" type="text" name="room_name" id="room_name"
+                required autofocus autocomplete="room_name" />
             <br>
-            <flux:input wire:model="customer_email" :label="__('Customer Email')" type="email" name="customer_email"
-                id="customer_email" required autofocus autocomplete="customer_email" />
+            <flux:input wire:model="room_price" :label="__('Room Price')" type="number" name="room_price"
+                id="room_price" required autofocus autocomplete="room_price" prefix="RM" />
             <br>
-            <flux:input wire:model="booking_code" :label="__('Booking Code')" type="number" name="booking_code"
-                id="booking_code" required autofocus autocomplete="booking_code" min="0" />
+            <flux:input wire:model="room_quantity" :label="__('Room Quantity')" type="number" name="room_quantity"
+                id="room_quantity" required autofocus autocomplete="room_quantity" />
             <br>
-            <flux:input wire:model="room_id" :label="__('Room ID')" type="number" name="room_id" id="room_id" required
-                autofocus autocomplete="room_id" min="0" />
+            <flux:input wire:model="room_available" :label="__('Room Available')" type="number" name="room_available"
+                id="room_available" required autofocus autocomplete="room_available" />
             <br>
             <div class="flex items-center justify-center gap-4 w-full">
                 <div class="flex items-center justify-center w-full">
@@ -50,64 +50,62 @@
                                 <tr>
                                     <th class="py-3 px-3 first:pl-0 last:pr-0 text-left text-sm font-medium text-zinc-800 dark:text-white  **:data-flux-table-sortable:last:mr-0"
                                         data-flux-column="">
-                                        <div class="flex in-[.group\/right-align]:justify-end">ID</div>
+                                        <div class="flex in-[.group\/right-align]:justify-end">Room Name</div>
                                     </th>
                                     <th class="py-3 px-3 first:pl-0 last:pr-0 text-left text-sm font-medium text-zinc-800 dark:text-white  **:data-flux-table-sortable:last:mr-0"
                                         data-flux-column="">
-                                        <div class="flex in-[.group\/right-align]:justify-end">Customer Name</div>
+                                        <div class="flex in-[.group\/right-align]:justify-end">Room Price</div>
                                     </th>
                                     <th class="py-3 px-3 first:pl-0 last:pr-0 text-left text-sm font-medium text-zinc-800 dark:text-white  **:data-flux-table-sortable:last:mr-0"
                                         data-flux-column="">
-                                        <div class="flex in-[.group\/right-align]:justify-end">Customer Email</div>
+                                        <div class="flex in-[.group\/right-align]:justify-end">Room Quantity</div>
                                     </th>
                                     <th class="py-3 px-3 first:pl-0 last:pr-0 text-left text-sm font-medium text-zinc-800 dark:text-white  **:data-flux-table-sortable:last:mr-0"
                                         data-flux-column="">
-                                        <div class="flex in-[.group\/right-align]:justify-end">Booking Code</div>
+                                        <div class="flex in-[.group\/right-align]:justify-end">Room Available</div>
                                     </th>
                                     <th class="py-3 px-3 first:pl-0 last:pr-0 text-left text-sm font-medium text-zinc-800 dark:text-white  **:data-flux-table-sortable:last:mr-0"
                                         data-flux-column="">
-                                        <div class="flex in-[.group\/right-align]:justify-end">Room ID</div>
+                                        <div class="flex in-[.group\/right-align]:justify-end">Status</div>
                                     </th>
                                 </tr>
                             </thead>
-
-                            <tbody class="divide-y divide-zinc-800/10 dark:divide-white/20 [&:not(:has(*))]:border-t-0!"
-                                data-flux-rows="">
-                                @foreach ($this->bookings2 as $booking)
-                                    <tr data-flux-row="">
-                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm  text-zinc-500 dark:text-zinc-300"
+                            <tbody class="divide-y divide-zinc-800/10 dark:divide-white/20" data-flux-rows="">
+                                @foreach($this->rooms as $room)
+                                    <tr data-flux-rows="">
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{ $booking->id }}
+                                            {{$room->room_name}}
                                         </td>
-                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm  text-zinc-500 dark:text-zinc-300"
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{ $booking->customer_name }}
+                                            {{$room->room_price}}
                                         </td>
-                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm  text-zinc-500 dark:text-zinc-300"
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{ $booking->customer_email }}
+                                            {{$room->room_quantity}}
                                         </td>
-                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm  text-zinc-500 dark:text-zinc-300"
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{ $booking->booking_code }}
+                                            {{ $room->room_available }}
                                         </td>
-                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm  font-medium text-zinc-800 dark:text-white"
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{ $booking->room_id }}
+                                            {{$room->status}}
                                         </td>
-                                        <td
-                                            class="py-3 px-3 first:pl-0 last:pr-0 text-sm  text-zinc-500 dark:text-zinc-300">
+                                        <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
+                                            data-flux-cell="">
                                             <div class="flex items-center justify-center gap-4">
                                                 <div class="flex items-center justify-center">
                                                     <div class="flex gap-4">
-                                                        <flux:button wire:click.prevent="edit({{ $booking->id }})"
-                                                            variant="primary" type="submit" class="w-full">
-                                                            {{ __('Edit') }}
-                                                        </flux:button>
-                                                        <flux:button wire:click.prevent="deleteConfirm({{ $booking->id }})"
-                                                            variant="danger" type="submit" class="w-full">
-                                                            {{ __('Delete') }}
-                                                        </flux:button>
+                                                        <flux-button wire:click="edit({{$room->id}})" variant="primary"
+                                                            type="submit" class="w-full">
+                                                            {{ ('Edit') }}
+                                                        </flux-button>
+                                                        <flux-button wire:click="danger({{$room->id}})" variant="danger"
+                                                            type="submit" class="w-full">
+                                                            {{ ('Delete') }}
+                                                        </flux-button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,8 +115,8 @@
                             </tbody>
                         </table>
                         <div
-                            class="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-700  max-sm:flex-col max-sm:gap-3 max-sm:items-end">
-                            {{ $this->bookings2->links() }}
+                            class="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-700 max-sm:flex-col max-sm:gap-3 max-sm:items-end">
+                            {{ $this->rooms->links() }}
                         </div>
                     </div>
                 </div>
@@ -128,16 +126,17 @@
     <script>
         window.addEventListener('alert', function () {
             Swal.fire({
-                icon: event.detail[0].type,
-                title: event.detail[0].message,
-            });
-        });
-
+                title: 'Success',
+                text: 'Room Added Successfully',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        })
         window.addEventListener('delete', function () {
             const id = event.detail[0].id
             console.log('delete', event, id)
             Swal.fire({
-                title: event.detail[0].message,
+                title: event.detail[0].title,
                 text: event.detail[0].text,
                 icon: event.detail[0].type,
                 showCancelButton: true,
@@ -154,6 +153,6 @@
                     @this.call('resetInput')
                 }
             })
-        });
+        })
     </script>
 </div>
