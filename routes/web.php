@@ -7,6 +7,8 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
 use App\Livewire\Counter;
 use App\Livewire\NewBooking;
+use App\Livewire\NewRoom;
+
 
 
 
@@ -46,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('counter', Counter::class)->name('counter');
 Route::get('new-booking', NewBooking::class)->name('new-booking');
+Route::get('new-room', NewRoom::class)->name('new-room');
 
 });
 
