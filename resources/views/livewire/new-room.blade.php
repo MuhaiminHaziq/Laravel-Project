@@ -7,7 +7,7 @@
         <flux:separator variant="subtle" />
     </div>
     <div class="px-6 py-16 overflow-x-auto">
-        @if($msg != '')
+        @if ($msg != '')
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                 {{ $msg }}
             </div>
@@ -27,7 +27,7 @@
             <br>
             <div class="flex items-center justify-center gap-4 w-full">
                 <div class="flex items-center justify-center w-full">
-                    @if($updateMode)
+                    @if ($updateMode)
                         <flux:button wire:click.prevent="update()" variant="primary" type="submit" class="w-full">
                             {{ __('Update') }}
                         </flux:button>
@@ -71,19 +71,19 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-zinc-800/10 dark:divide-white/20" data-flux-rows="">
-                                @foreach($this->rooms as $room)
+                                @foreach ($this->rooms as $room)
                                     <tr data-flux-rows="">
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{$room->room_name}}
+                                            {{ $room->room_name }}
                                         </td>
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{$room->room_price}}
+                                            {{ $room->room_price }}
                                         </td>
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{$room->room_quantity}}
+                                            {{ $room->room_quantity }}
                                         </td>
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
@@ -91,20 +91,20 @@
                                         </td>
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
-                                            {{$room->status}}
+                                            {{ $room->status }}
                                         </td>
                                         <td class="py-3 px-3 first:pl-0 last:pr-0 text-sm font-medium text-zinc-800 dark:text-white"
                                             data-flux-cell="">
                                             <div class="flex items-center justify-center gap-4">
                                                 <div class="flex items-center justify-center">
                                                     <div class="flex gap-4">
-                                                        <flux-button wire:click="edit({{$room->id}})" variant="primary"
-                                                            type="submit" class="w-full">
-                                                            {{ ('Edit') }}
+                                                        <flux-button wire:click="edit({{ $room->id }})"
+                                                            variant="primary" type="submit" class="w-full">
+                                                            {{ 'Edit' }}
                                                         </flux-button>
-                                                        <flux-button wire:click="danger({{$room->id}})" variant="danger"
-                                                            type="submit" class="w-full">
-                                                            {{ ('Delete') }}
+                                                        <flux-button wire:click="danger({{ $room->id }})"
+                                                            variant="danger" type="submit" class="w-full">
+                                                            {{ 'Delete' }}
                                                         </flux-button>
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('alert', function () {
+        window.addEventListener('alert', function() {
             Swal.fire({
                 title: 'Success',
                 text: 'Room Added Successfully',
@@ -132,7 +132,7 @@
                 confirmButtonText: 'OK'
             })
         })
-        window.addEventListener('delete', function () {
+        window.addEventListener('delete', function() {
             const id = event.detail[0].id
             console.log('delete', event, id)
             Swal.fire({
@@ -147,8 +147,7 @@
                 if (result.value) {
                     console.log('delete', event, id);
                     @this.call('delete', id)
-                }
-                else {
+                } else {
                     console.log('cancel');
                     @this.call('resetInput')
                 }
