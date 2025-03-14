@@ -3,15 +3,15 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Booking;
+use App\Models\Room;
 use Livewire\WithPagination;
 
-class NewBooking extends Component
+class NewRoom extends Component
 {
     use WithPagination;
     public $sortBy = 'id';
     public $sortDirection = 'desc';
-    public $customer_name, $customer_email, $booking_code, $room_id, $id;
+    public $room_name, $room_price, $room_quantity, $room_available, $status, $id;
     public $updateMode = false, $msg = '';
     public function sort($column)
     {
@@ -23,82 +23,88 @@ class NewBooking extends Component
         }
     }
     #[\Livewire\Attributes\Computed]
-    public function bookings2()
+    public function rooms()
     {
-        return Booking::query()
+        return Room::query()
             ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)
             ->paginate(5);
     }
     public function render()
     {
-        return view('livewire.new-booking');
-        // $bookings = Booking::all();
-        // return view('livewire.new-booking', [
-        //     'bookings' => $bookings
+        return view('livewire.new-room');
+        // $rooms = Room::all();
+        // return view('livewire.new-room', [
+        //     'rooms' => $rooms
         // ]);
     }
     public function resetInput()
     {
-        $this->customer_name = '';
-        $this->customer_email = '';
-        $this->booking_code = '';
-        $this->room_id = '';
+        $this->room_name = '';
+        $this->room_price = '';
+        $this->room_quantity = '';
+        $this->room_available = '';
+        $this->status = '';
         $this->id = '';
     }
     public function update()
     {
         $this->validate([
-            'customer_name' => 'required',
-            'customer_email' => 'required | email',
-            'booking_code' => 'required',
-            'room_id' => 'required',
+            'room_name' => 'required',
+            'room_price' => 'required',
+            'room_quantity' => 'required',
+            'room_available' => 'required',
+            'status' => 'required',
         ]);
-        $booking = Booking::find($this->id);
-        $booking->update([
-            'customer_name' => $this->customer_name,
-            'customer_email' => $this->customer_email,
-            'booking_code' => $this->booking_code,
-            'room_id' => $this->room_id,
+        $room = Room::find($this->id);
+        $room->update([
+            'room_name' => $this->room_name,
+            'room_price' => $this->room_price,
+            'room_quantity' => $this->room_quantity,
+            'room_available' => $this->room_available,
+            'status' => $this->status,
         ]);
         $this->resetInput();
         $this->updateMode = false;
-        // $this->msg='Booking Updated Successfully.';
+        // $this->msg='Room Updated Successfully.';
         $this->updateAlert();
     }
     public function edit($id)
     {
-        $booking = Booking::find($id);
-        // dd($booking);
-        $this->id = $booking->id;
-        $this->customer_name = $booking->customer_name;
-        $this->customer_email = $booking->customer_email;
-        $this->booking_code = $booking->booking_code;
-        $this->room_id = $booking->room_id;
+        $room = Room::find($id);
+        // dd($room);
+        $this->id = $room->id;
+        $this->room_name = $room->room_name;
+        $this->room_price = $room->room_price;
+        $this->room_quantity = $room->room_quantity;
+        $this->room_available = $room->room_available;
+        $this->status = $room->status;
         $this->updateMode = true;
         $this->msg = '';
     }
     public function delete($id)
     {
-        Booking::find($id)->delete();
-        // $this->msg='Booking Deleted Successfully.';
+        Room::find($id)->delete();
+        // $this->msg='Room Deleted Successfully.';
         $this->deleteAlert();
     }
     public function store()
     {
-        // dd($this->customer_name, $this->customer_email, $this->booking_code, $this->room_id);
         $this->validate([
-            'customer_name' => 'required',
-            'customer_email' => 'required | email',
-            'booking_code' => 'required',
-            'room_id' => 'required',
+            'room_name' => 'required',
+            'room_price' => 'required',
+            'room_quantity' => 'required',
+            'room_available' => 'required',
+            'status' => 'required',
         ]);
-        Booking::create([
-            'customer_name' => $this->customer_name,
-            'customer_email' => $this->customer_email,
-            'booking_code' => $this->booking_code,
-            'room_id' => $this->room_id,
+        // dd('test');
+        Room::create([
+            'room_name' => $this->room_name,
+            'room_price' => $this->room_price,
+            'room_quantity' => $this->room_quantity,
+            'room_available' => $this->room_available,
+            'status' => $this->status,
         ]);
-        // $this->msg='Booking Created Successfully.';
+        // $this->msg='Room Created Successfully.';
         $this->successAlert();
         $this->resetInput();
     }
@@ -106,21 +112,21 @@ class NewBooking extends Component
     {
         $this->dispatch('alert', [
             'type' => 'success',
-            'message' => 'Booking Created Successfully.',
+            'message' => 'Room Created Successfully.',
         ]);
     }
     public function updateAlert()
     {
         $this->dispatch('alert', [
             'type' => 'success',
-            'message' => 'Booking Updated Successfully.',
+            'message' => 'Room Updated Successfully.',
         ]);
     }
     public function deleteAlert()
     {
         $this->dispatch('alert', [
             'type' => 'success',
-            'message' => 'Booking Deleted Successfully.',
+            'message' => 'Room Deleted Successfully.',
         ]);
     }
     public function deleteConfirm($id)

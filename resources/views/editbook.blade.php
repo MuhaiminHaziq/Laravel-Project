@@ -1,6 +1,6 @@
 <h1>Edit Booking</h1>
 
-<form action="{{route('booking.update', $booking->id)}}" method="POST">
+<form action="{{ route('booking.update', $booking->id) }}" method="POST">
     @csrf
     @method('PUT')
     <label for="customer_name">Customer Name:</label>
@@ -20,7 +20,8 @@
 
     <br>
     <label for="booking_code">Booking Code:</label>
-    <input type="text" name="booking_code" id="booking_code" value="{{ old('booking_code', $booking->booking_code) }}">
+    <input type="text" name="booking_code" id="booking_code"
+        value="{{ old('booking_code', $booking->booking_code) }}">
     @error('booking_code')
         <div style="color:red">{{ $message }}</div>
     @enderror

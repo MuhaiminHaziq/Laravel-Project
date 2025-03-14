@@ -3,12 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\HotelController;
-use App\Http\Controllers\RoomController;
 use App\Http\Controllers\BookingController;
 use App\Livewire\Counter;
 use App\Livewire\NewBooking;
-
-
+use App\Livewire\NewRoom;
+use App\Livewire\Task;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,8 +18,6 @@ Route::get('/', function () {
 // })->name('hotel');
 
 Route::get('hotel', [HotelController::class, 'index'])->name('hotel');
-
-Route::get('room', [RoomController::class, 'index'])->name('room');
 
 Route::get('booking', [BookingController::class, 'index'])->name('booking');
 
@@ -38,15 +35,13 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
-
-Route::get('counter', Counter::class)->name('counter');
-Route::get('new-booking', NewBooking::class)->name('new-booking');
-
+    Route::get('counter', Counter::class)->name('counter');
+    Route::get('new-booking', NewBooking::class)->name('new-booking');
+    Route::get('new-room', NewRoom::class)->name('new-room');
+    Route::get('task', Task::class)->name('task');
 });
-
 require __DIR__ . '/auth.php';
