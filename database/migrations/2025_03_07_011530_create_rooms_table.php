@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_name') ->nullable();
+            $table->string('room_name')->nullable();
             $table->decimal('room_price', 8, 2)->nullable();
-            $table->integer('room_quantity') ->nullable();
-            $table->integer('room_available') ->nullable();
+            $table->integer('room_quantity')->nullable();
+            $table->integer('room_available')->nullable();
             $table->enum('status', ['available', 'booked', 'maintanance'])->default('available')->nullable();
             $table->timestamps();
         });

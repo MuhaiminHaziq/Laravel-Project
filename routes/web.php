@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Livewire\Counter;
 use App\Livewire\NewBooking;
 use App\Livewire\NewRoom;
+use App\Livewire\Task;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,5 +42,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('counter', Counter::class)->name('counter');
     Route::get('new-booking', NewBooking::class)->name('new-booking');
     Route::get('new-room', NewRoom::class)->name('new-room');
+    Route::get('task', Task::class)->name('task');
 });
 require __DIR__ . '/auth.php';

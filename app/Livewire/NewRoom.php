@@ -31,10 +31,11 @@ class NewRoom extends Component
     }
     public function render()
     {
-        $rooms = Room::all();
-        return view('livewire.new-room', [
-            'rooms' => $rooms
-        ]);
+        return view('livewire.new-room');
+        // $rooms = Room::all();
+        // return view('livewire.new-room', [
+        //     'rooms' => $rooms
+        // ]);
     }
     public function resetInput()
     {
@@ -95,6 +96,7 @@ class NewRoom extends Component
             'room_available' => 'required',
             'status' => 'required',
         ]);
+        // dd('test');
         Room::create([
             'room_name' => $this->room_name,
             'room_price' => $this->room_price,

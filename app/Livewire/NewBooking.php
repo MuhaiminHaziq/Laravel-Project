@@ -31,10 +31,11 @@ class NewBooking extends Component
     }
     public function render()
     {
-        $bookings = Booking::all();
-        return view('livewire.new-booking', [
-            'bookings' => $bookings
-        ]);
+        return view('livewire.new-booking');
+        // $bookings = Booking::all();
+        // return view('livewire.new-booking', [
+        //     'bookings' => $bookings
+        // ]);
     }
     public function resetInput()
     {
