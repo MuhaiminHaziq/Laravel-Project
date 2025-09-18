@@ -8,10 +8,12 @@ class Room extends Model
 {
     //
     protected $fillable = [
-        'room_name',
-        'room_price',
-        'room_quantity',
-        'room_available',
-        'status',
+        'student_name',
+        'student_age',
+        'student_id',
+        'student_email',
+        'student_username',
+        'student_password',
+        'student_department',
     ];
 }
